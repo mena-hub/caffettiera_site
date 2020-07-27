@@ -1,0 +1,29 @@
+{% extends 'core/base.html' %}
+{% block title %}Consulta{% endblock %}
+
+{% block content %}
+<section class="page-section cta">
+    <div class="container">
+    <div class="row">
+    <div class="col-xl-9 col-lg-10 mx-auto">
+    <div class="cta-innerv rounded p-5">
+            <h2 class="section-heading text-center mb-5">
+            <span class="section-heading-upper">sqlite3</span>
+            <span class="section-heading-lower">Servicios</span>
+            </h2>
+            {% for columna in columnas %}
+                <tr>
+                {% for c in columna %}
+                    <td scope="row">
+                        {{ c }}
+                        <br>
+                    </td>
+                {% endfor %}
+                </tr>
+            {% endfor %}
+    </div>
+    </div>   
+    </div>
+    </div>
+</section>
+{% endblock %}
