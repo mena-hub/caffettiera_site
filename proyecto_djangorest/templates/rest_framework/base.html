@@ -1,0 +1,7 @@
+{% extends "rest_framework/base.html" %}
+{% load static %}
+
+{% block style %}
+    {{ block.super }}
+    <link href="{% static 'favicon.ico' %}" rel="shortcut icon" type="image/png">
+{% endblock %}
