@@ -25,6 +25,9 @@
             <li class="nav-item px-lg-2 {% if request.path|slice:':6' == '/blog/' %}active{% endif %}">
                 <a class="nav-link text-uppercase text-expanded" href="{% url 'blog' %}">Blog</a>
             </li>
+            <li class="nav-item px-lg-2 {% if request.path == '/products/' %}active{% endif %}">
+                <a class="nav-link text-uppercase text-expanded" href="{% url 'products' %}">Productos</a>
+            </li>
             </ul>
         </div>
     </div>
