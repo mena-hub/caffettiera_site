@@ -1,0 +1,74 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}Productos{% endblock %}
+
+{% block content %}
+<section class="page-section cta">
+    <div class="container">
+    <div class="cta-innerv text-center rounded">
+            <h2>Productos disponibles.</h2>
+            <br>
+            <table class="table table-striped" style="display: none" id="table">
+                <thead>
+                    <tr>
+                    <th>Producto</th>
+                    <th>Precio</th>
+                    <th>Descripción</th>
+                    <th>En stock</th>
+                    </tr>
+                </thead>
+                <tbody id="table-product">
+                </tbody>
+            </table>
+    </div>
+    </div>
+</section>
+{% endblock %}
+{% block js %}
+<script> 
+    $(document).ready(function (){
+        $.ajax({
+            url: "http://localhost:3000/api/v1/products/",
+            type: "get",
+            success: function (data){
+                setContentTableFromApiData(data);
+            },
+            error: function (data){
+                console.log("error");
+                console.error(data);
+            }
+        });
+
+        function setContentTableFromApiData(data){
+            $("#table").fadeIn(2000);
+            data.forEach(element => {
+                let table = $("#table-product");
+                table.append(
+                    "<tr>" +
+                    "<td>" +
+                    element.name + 
+                    "</td>" +
+                    "<td>" +
+                    element.price +
+                    "</td>" +
+                    "<td>" +
+                    element.description +
+                    "</td>" +
+                    "<td>" +
+                    stock(element.stock) +
+                    "</td>" + 
+                    "</tr>"
+                )
+            });
+        }
+
+        function stock(stock) {
+            if (stock) {
+                return "<strong><p class='text-success'>En stock</p></strong>";
+            } else {
+                return "<strong><p class='text-danger'>Sin stock</p></strong>";
+            } 
+        }
+    });
+</script>
+{% endblock js %}
