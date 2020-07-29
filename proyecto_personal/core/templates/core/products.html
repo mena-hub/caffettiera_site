@@ -1,0 +1,93 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}Productos{% endblock %}
+
+{% block content %}
+<section class="page-section cta">
+    <div class="container">
+    <div class="cta-innerv rounded">
+            <h2 class="section-heading mb-4">
+            <span class="section-heading-upper" id='rotate'>Una pausa</span>
+            <span class="section-heading-lower">Tienda</span>
+            </h2>
+            <div class="table-responsive-md">
+            <table class="table">
+                <thead>
+                    <tr>
+                    <th>Producto</th>
+                    <th>Precio</th>
+                    <th>Descripción</th>
+                    <th>Stock</th>
+                    </tr>
+                </thead>
+                <tbody id="table-product">
+                </tbody>
+            </table>
+            </div>
+    </div>
+    </div>
+</section>
+{% endblock %}
+{% block js %}
+<script> 
+    $(document).ready(function (){
+        $.ajax({
+            method: "get",
+            url: "http://localhost:3000/api/v1/products/",
+            dataType: "json",
+            contentType: "application/json",
+            success: function (data){
+                setContentTableFromApiData(data);
+            },
+            error: function (data){
+                console.log("error");
+                console.error(data);
+            }
+        });
+
+        function setContentTableFromApiData(data){ 
+            data.forEach(element => {
+                let table = $("#table-product");
+                table.append(
+                    "<tr>" +
+                    "<td>" +
+                    element.name + 
+                    "</td>" +
+                    "<td>" +
+                    element.price +
+                    "</td>" +
+                    "<td>" +
+                    element.description +
+                    "</td>" +
+                    "<td>" +
+                    stock(element.stock) +
+                    "</td>" + 
+                    "</tr>"
+                )
+            });
+        }
+
+        function stock(stock) {
+            if (stock) {
+                return "En stock";
+            } else {
+                return "Sin stock";
+            } 
+        }
+        
+        function rotateSentence() {
+            let sentences = ["Un aroma", "Un encuentro", "Una pausa"];
+            let current = 0
+            let rotate = $('#rotate')
+            setInterval(() => {
+                rotate.fadeOut(200, () => {
+                    current = (current==sentences.length) ? 0 : current;
+                    rotate.text(sentences[current]).fadeIn();
+                    current += 1;
+                });
+            }, 3000);
+        }
+        rotateSentence();
+    });
+</script>
+{% endblock js %}
