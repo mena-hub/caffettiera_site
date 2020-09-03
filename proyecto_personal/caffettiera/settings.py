@@ -145,15 +145,3 @@ EMAIL_HOST = 'smtp.mailtrap.io'
 EMAIL_HOST_USER = 'd9a9ed059dd19b'
 EMAIL_HOST_PASSWORD = '4bda17a88bf0c4'
 EMAIL_PORT = '2525'
-
-
-# Django messages + Bootstrap 4 
-# https://docs.djangoproject.com/en/3.0/ref/contrib/messages/
-
-try:
-    from django.contrib.messages import constants as messages
-    MESSAGE_TAGS = {
-        messages.ERROR: 'danger',
-    }
-except Exception as e:
-    pass
