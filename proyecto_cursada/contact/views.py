@@ -20,12 +20,13 @@ def contact(request):
                 ["mssz.nnia@gmail.com"],
                 reply_to=[email],
             ) # -------------------------------------
-        try:
-            email.send()
-            return redirect("respuesta/"+'?ok')
-            # return redirect(reverse("contact")+'?ok')
-        except:
-            return redirect("respuesta/"+'?fail')
+            try:
+                email.send()
+                return redirect("respuesta/"+'?ok')
+                # return redirect(reverse("contact")+'?ok')
+            except:
+                return redirect("respuesta/"+'?fail')
+    
     return render(request, "contact/contact.html",
                     {
                         'formulario':contact_form
