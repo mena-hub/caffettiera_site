@@ -11,9 +11,9 @@
         <div class="col-xl-9 col-lg-10 mx-auto">
         <div class="bg-faded rounded p-5">
             {% if 'ok' in request.GET %}
-                <p><b>Su mensaje ha sido enviado correctamente!!!.</b></p>
+                <p>Su mensaje ha sido enviado correctamente!!! <strong><span class='text-success'>*</span></strong></p>
             {% elif 'fail' in request.GET %}
-                <p><b>Ha ocurrido un error, intente nuevamente.</b></p>
+                <p>Ha ocurrido un error, intente nuevamente <strong><span class='text-danger'>*</span></strong></p>
             {% endif %}
         </div>
         </div>
