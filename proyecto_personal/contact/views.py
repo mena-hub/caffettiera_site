@@ -20,12 +20,13 @@ def contact(request):
                 ["mssz.nnia@gmail.com"],
                 reply_to=[email],
             ) # -------------------------------------
-        try:
-            email.send()
-            messages.success(request, 'Mensaje recibido.')   
-        except:
-            messages.error(request, 'Opps, algo falló.')
-        return redirect('contact')
+            try:
+                email.send()
+                messages.success(request, 'Mensaje recibido.')   
+            except:
+                messages.error(request, 'Opps, algo falló.')
+            
+            return redirect("contact")
     # ----
     return render(request, "contact/contact.html",
                     {
